@@ -1,29 +1,29 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import BlogPost from "./BlogPost.vue";
-//https://jsonplaceholder.typicode.com/
+import axios from "axios";
 
 const posts = ref(null);
 
-async function fetchData() {
-  try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    posts.value = data;
-  } catch (error) {
-    console.error("Error fetching data:", error); //
-  }
-}
+// async function fetchData() {
+//   try {
+//     const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+//     const data = await response.json();
+//     posts.value = data;
+//   } catch (error) {
+//     console.error("Error fetching data:", error); //
+//   }
+// }
 
 // ! Axios
 
 async function fetchDataAxios(url) {
   try {
     const response = await axios.get(url);
-    console.log(response.data);
+    posts.value = response.data;
   } catch (error) {
     console.error("Error fetching data:", error);
   }
@@ -54,10 +54,16 @@ async function fetchDataAxios(url) {
 // async function fetchDataInParallel() {
 //   try {
 //     const [response1, response2, response3] = await Promise.all([
-//       fetch("https://api.example.com/data1"),
-//       fetch("https://api.example.com/data2"),
-//       fetch("https://api.example.com/data3")
-//     ]);
+//       fetch("https://jsonplaceholder.typicode.com/posts"),
+//       fetch("https://jsonplaceholder.typicode.com/posts"),
+//       fetch("https://jsonplaceholder.typicode.com/posts")
+//     ]); // [response1, response2, response3]
+
+//     // const [a, b, c] = [1, 2, 3];
+//     // const { name, age } = { name: "alex", age: "18" };
+//     //response1
+//     //response2
+//     //response3
 
 //     const data1 = await response1.json();
 //     const data2 = await response2.json();
@@ -70,12 +76,13 @@ async function fetchDataAxios(url) {
 //     console.error("Error fetching data:", error);
 //   }
 // }
+
+onMounted(() => {
+  fetchDataAxios("https://jsonplaceholder.typicode.com/posts");
+});
 </script>
 
 <template>
-  <div>
-    <button @click="fetchData">Get posts</button>
-  </div>
   <div v-if="posts">
     <!-- {{ posts }} -->
     <BlogPost v-for="post in posts" :key="post.id">
