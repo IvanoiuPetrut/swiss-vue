@@ -13,9 +13,11 @@ onMounted(() => {
 
 <template>
   <div>
-    <span :class="{ 'completed-task': completed, 'wrong-task': name == 'Nu fac nimic' }">{{
-      name
-    }}</span>
+    <RouterLink :to="{ name: 'toDoItem', params: { toDoId: name } }">
+      <span :class="{ 'completed-task': completed, 'wrong-task': name == 'Nu fac nimic' }">{{
+        name
+      }}</span>
+    </RouterLink>
     <button v-if="!completed" @click="$emit('completeTask', name)">Delete</button>
   </div>
 </template>
