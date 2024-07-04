@@ -1,6 +1,11 @@
 <script setup>
 import { computed, ref, watch, onMounted } from "vue";
 import ToDoList from "./components/ToDoList.vue";
+import BaseAlert from "./components/BaseAlert.vue";
+import FancyButton from "./components/FancyButton.vue";
+import BlogPost from "./components/BlogPost.vue";
+
+import FetchComponent from "./components/FetchComponent.vue";
 
 const titleForMyToDoList = "My to do list for today";
 
@@ -37,7 +42,29 @@ onMounted(() => {
 </script>
 
 <template>
-  <ToDoList :title="titleForMyToDoList" />
+  <FetchComponent />
+
+  <FancyButton> </FancyButton>
+
+  <BlogPost>
+    <template #heading> Titlul postului </template>
+
+    <template #content>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto molestias nostrum laboriosam
+      recusandae libero quibusdam, fugit sapiente ipsum laudantium sequi accusamus at sit non
+      impedit quis doloribus reiciendis amet. Incidunt!
+    </template>
+  </BlogPost>
+
+  <BlogPost>
+    <template #heading> Alt titlu </template>
+
+    <template #content> O descriere mai scrututza. </template>
+  </BlogPost>
+
+  <BaseAlert :content="'Felicitari ai schimbat parola cu succes'" class="alert-succes" />
+  <BaseAlert :content="'Parola trebuie sa aiba minim 12 caractere'" class="alert-error" />
+  <ToDoList :title="titleForMyToDoList" class="my-class" id="to-do-list" />
   <p>
     {{ firstName + " " + secondName }}
   </p>
@@ -57,4 +84,12 @@ onMounted(() => {
   <div ref="myDiv">DIVUL MEU</div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.alert-succes {
+  background-color: greenyellow;
+}
+
+.alert-error {
+  background-color: red;
+}
+</style>

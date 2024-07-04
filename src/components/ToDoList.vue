@@ -49,17 +49,22 @@ onMounted(() => {
 </script>
 
 <template>
-  <h1>{{ title }}</h1>
-
-  <p>All tasks: {{ tasks }}</p>
-  <p>Completed tasks: {{ completedTasks }}</p>
-  <input type="text" v-model="taskText" @keyup.enter="addTask" />
-  <button @click="addTask">Add</button>
-  <ul>
-    <li v-for="(task, index) in tasks" :key="index">
-      <ToDoListItem :name="task" :completed="isTaksCompleted(task)" @complete-task="completeTask" />
-    </li>
-  </ul>
+  <div>
+    <h1>{{ title }}</h1>
+    <p>All tasks: {{ tasks }}</p>
+    <p>Completed tasks: {{ completedTasks }}</p>
+    <input type="text" v-model="taskText" @keyup.enter="addTask" />
+    <button @click="addTask">Add</button>
+    <ul>
+      <li v-for="(task, index) in tasks" :key="index">
+        <ToDoListItem
+          :name="task"
+          :completed="isTaksCompleted(task)"
+          @complete-task="completeTask"
+        />
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style scoped></style>
