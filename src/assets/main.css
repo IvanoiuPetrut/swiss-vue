@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .router-link-active {
-  background-color: grey;
+  background-color: oklch(var(--p) / 0.2);
 }
