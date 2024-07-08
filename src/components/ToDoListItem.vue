@@ -12,22 +12,16 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <RouterLink :to="{ name: 'toDoItem', params: { toDoId: name } }">
-      <span :class="{ 'completed-task': completed, 'wrong-task': name == 'Nu fac nimic' }">{{
-        name
-      }}</span>
+  <div class="flex gap-6 items-center">
+    <RouterLink
+      :to="{ name: 'toDoItem', params: { toDoId: name } }"
+      class="text-xl bg-neutral px-2 py-2 rounded-md hover:bg-base-200 hover:text-primary transition-all ease-in-out"
+      :class="{ 'bg-red-400': completed, 'bg-error': name == 'Nu fac nimic' }"
+    >
+      {{ name }}
     </RouterLink>
-    <button v-if="!completed" @click="$emit('completeTask', name)">Delete</button>
+    <button class="btn btn-xs btn-error" v-if="!completed" @click="$emit('completeTask', name)">
+      Delete
+    </button>
   </div>
 </template>
-
-<style scoped>
-.completed-task {
-  text-decoration: line-through;
-}
-
-.wrong-task {
-  background-color: red;
-}
-</style>

@@ -5,3 +5,7 @@
 .router-link-active {
   background-color: oklch(var(--p) / 0.2);
 }
+
+.my-custom-class {
+  @apply bg-blue-500 text-white;
+}

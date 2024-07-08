@@ -83,7 +83,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="posts">
+  <div v-if="posts" class="flex flex-col gap-8">
     <!-- {{ posts }} -->
     <BlogPost v-for="post in posts" :key="post.id">
       <template #heading> {{ post.title }} </template>

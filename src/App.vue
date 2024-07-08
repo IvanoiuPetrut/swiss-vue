@@ -5,8 +5,9 @@ import { RouterView } from "vue-router";
 
 <template>
   <TopNavigation />
-  
-  <RouterView></RouterView>
+  <main class="px-16 py-12">
+    <RouterView></RouterView>
+  </main>
 </template>
 
 <style scoped>
